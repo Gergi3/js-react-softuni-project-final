@@ -1,60 +1,38 @@
+import { Route, Routes } from 'react-router-dom';
+
+import { Footer } from './components/shared/footer/Footer';
+import { Header } from './components/shared/header/Header';
+import { Home } from './components/home/Home';
+import { Contact } from './components/contact/Contact';
+import { About } from './components/about/About';
+import { ArticleCreate } from './components/article-create/ArticleCreate';
+import { ArticlesPage } from './components/articles-page/ArticlesPage';
+import { ArticleDetails } from './components/article-details/ArticleDetails';
+import { Login } from './components/login/Login';
+import { Register } from './components/register/Register';
+import { Logout } from './components/logout/Logout';
+import { NotFound } from './components/not-found/NotFound';
 import './App.scss';
 
-function App() {
-
-    
+export const App = () => {
     return (
-        <>
-            {/* header */}
-            <div className="top-header-area" id="sticker">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 col-sm-12 text-center">
-                            <div className="main-menu-wrap">
-                                {/* logo */}
-                                <div className="site-logo">
-                                    <a href="index.html">
-                                        <img src="assets/img/logo.png" alt="" />
-                                    </a>
-                                </div>
-                                {/* logo */}
-                                {/* menu start */}
-                                <nav className="main-menu">
-                                    <ul>
-                                        <li className="current-list-item">
-                                            <a href="news.html">News</a>
-                                            <ul className="sub-menu">
-                                                <li>
-                                                    <a href="news.html">News</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-news.html">Single News</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact</a>
-                                        </li>
-                                        <li>
-                                            <a href="checkout.html">Register/Login/Create/Edit</a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html">404 page</a>
-                                        </li>
-                                        <li>
-                                            <a href="about.html">About</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                {/* menu end */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* end header */}
-        </>
+        <div id="site-wrapper">
+            <Header />
+
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/articles" element={<ArticlesPage />}/>
+                <Route path="/articles/single" element={<ArticleDetails />}/>
+                <Route path="/articles/create" element={<ArticleCreate />}/>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/register" element={<Register />}/>
+                <Route path="/logout" element={<Logout />}/>
+                <Route path="/about" element={<About />}/>
+                <Route path="/contact" element={<Contact />}/>
+                <Route path="/*" element={<NotFound />}/>
+            </Routes>
+
+            <Footer />
+        </div>
     );
 }
-
-export default App;

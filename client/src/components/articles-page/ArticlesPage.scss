@@ -1,0 +1,29 @@
+.footer-box {
+  &.subscribe form {
+    input {
+      border: none;
+      background-color: #012738;
+      width: 78%;
+      padding: 15px;
+      margin-right: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      color: #fff;
+    }
+
+    button {
+      width: 20%;
+      border: none;
+      background-color: #012738;
+      color: #f28123;
+      padding: 15px 0;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

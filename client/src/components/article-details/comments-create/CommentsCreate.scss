@@ -1,0 +1,46 @@
+.comment-template {
+  h4 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  > p {
+    opacity: 0.7;
+    margin-bottom: 30px;
+  }
+
+  form p {
+    input {
+      &[type="text"] {
+        border: 1px solid #ddd;
+        width: 49%;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 15px;
+        color: #051922;
+      }
+
+      &[type="email"] {
+        border: 1px solid #ddd;
+        width: 49%;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 15px;
+        color: #051922;
+        margin-left: 10px;
+      }
+    }
+
+    textarea {
+      border: 1px solid #ddd;
+      padding: 15px;
+      font-size: 15px;
+      color: #051922;
+      border-radius: 5px;
+      height: 250px;
+      resize: none;
+      width: 100%;
+    }
+  }
+}

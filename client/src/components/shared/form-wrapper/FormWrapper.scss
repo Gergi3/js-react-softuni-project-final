@@ -1,0 +1,76 @@
+.card.single-accordion {
+  .card-header {
+    background-color: #fff;
+    border: none;
+    padding: 0;
+  }
+
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  border-bottom: 1px solid #efefef !important;
+
+  .card-header h5 button {
+    color: #051922;
+    font-size: 15px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    text-decoration: none;
+    border: none;
+    background-color: #efefef;
+    position: relative;
+    padding-left: 50px;
+    font-weight: 600;
+  }
+}
+
+.card.single-accordion {
+  border: 1px solid #f9f9f9;
+}
+
+.billing-address-form {
+  form p {
+    input {
+      border: 1px solid #ddd;
+      padding: 15px;
+      width: 100%;
+      border-radius: 3px;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      height: 120px;
+      resize: none;
+    }
+  }
+
+  padding: 20px;
+}
+
+.card.single-accordion .card-header h5 button:before {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  line-height: 22px;
+  margin-top: -11px;
+  color: #f28123;
+}
+
+.billing-address-form form p:last-child {
+  margin-bottom: 0;
+}
+
+.card.single-accordion {
+  border: 1px solid #eeeeee;
+}
