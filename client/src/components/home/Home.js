@@ -6,7 +6,6 @@ import './Home.scss'
 export const Home = () => {
     return (
         <>
-            {/* hero area */}
             <div className="hero-area hero-bg">
                 <div className="container">
                     <div className="row">
@@ -29,13 +28,19 @@ export const Home = () => {
                     </div>
                 </div>
             </div>
-            {/* end hero area */}
 
-            {/* latest news */}
+
+
             <div className="container">
-                <ArticlesList pagination={false}/>
+                <div className="col-lg-8 offset-lg-2 text-center pt-100">
+                    <div className="section-title">
+                        <h3><span className="orange-text">Newest</span> Articles</h3>
+                        <p>Pick from the newest, most popular game articles.</p>
+                    </div>
+                </div>
+
+                <ArticlesList pagination={false} />
             </div>
-            {/* end latest news */}
         </>
     );
 };

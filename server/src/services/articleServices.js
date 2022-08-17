@@ -32,6 +32,7 @@ async function getAll(query) {
         .limit(limit)
         .skip(skipIndex)
         .sort(sortCriteria)
+        .populate('owner', 'email')
         .lean();
 
     return articles;

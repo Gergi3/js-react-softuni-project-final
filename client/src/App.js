@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { ArticleProvider } from './contexts/ArticleContext';
 import { Footer } from './components/shared/footer/Footer';
 import { Header } from './components/shared/header/Header';
 import { Home } from './components/home/Home';
@@ -19,18 +20,20 @@ export const App = () => {
         <div id="site-wrapper">
             <Header />
 
-            <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/articles" element={<ArticlesPage />}/>
-                <Route path="/articles/single" element={<ArticleDetails />}/>
-                <Route path="/articles/create" element={<ArticleCreate />}/>
-                <Route path="/login" element={<Login />}/>
-                <Route path="/register" element={<Register />}/>
-                <Route path="/logout" element={<Logout />}/>
-                <Route path="/about" element={<About />}/>
-                <Route path="/contact" element={<Contact />}/>
-                <Route path="/*" element={<NotFound />}/>
-            </Routes>
+            <ArticleProvider>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/articles" element={<ArticlesPage />} />
+                    <Route path="/articles/single" element={<ArticleDetails />} />
+                    <Route path="/articles/create" element={<ArticleCreate />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </ArticleProvider>
 
             <Footer />
         </div>
