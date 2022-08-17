@@ -5,3 +5,7 @@ export const getAll = (params) => {
     const endpoint = `/data/articles?page=${page || ''}&limit=${limit || ''}&sort=${sort || 'createdAt'}&order=${order || 'desc'}&search=${search || ''}&criteria=${criteria || ''}&except=${except || ''}`;
     return api.get(endpoint);
 }
+
+export const create = (data) => {
+    return api.post('/data/articles', data)
+}

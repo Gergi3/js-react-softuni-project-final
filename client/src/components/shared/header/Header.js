@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 import './Header.scss'
 
 export const Header = () => {
+    const { user } = useContext(AuthContext);
+
     return (
         <div className="top-header-area" id="sticker">
             <div className="container">
@@ -15,7 +19,8 @@ export const Header = () => {
                             </div>
                             <nav className="main-menu">
                                 <ul>
-                                    <li className="current-list-item">
+                                    {/* className="current-list-item" */}
+                                    <li >
                                         <Link to="/articles">Articles</Link>
                                         <ul className="sub-menu">
                                             <li>
@@ -43,15 +48,23 @@ export const Header = () => {
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <Link to="/login">Login</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/register">Register</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/logout">Logout</Link>
-                                    </li>
+                                    {user.accessToken
+                                        ? (
+                                            <li>
+                                                <Link to="/logout">Logout</Link>
+                                            </li>
+                                        )
+                                        : (
+                                            <>
+                                                <li>
+                                                    <Link to="/login">Login</Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/register">Register</Link>
+                                                </li>
+                                            </>
+                                        )
+                                    }
                                 </ul>
                             </nav>
                         </div>

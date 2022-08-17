@@ -1,8 +1,41 @@
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import * as authServices from '../../services/authServices';
+
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import './Login.scss';
 
-export const Login = (params) => {
+export const Login = () => {
+    const [error, setError] = useState(null);
+    const [formState, setFormState] = useState({
+        email: '',
+        password: ''
+    });
+    const { loginUserHandler } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const inputChangeHandler = (e) => {
+        setFormState(old => ({
+            ...old,
+            [e.target.name]: e.target.value
+        }));
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        authServices.login(formState.email, formState.password)
+            .then(res => {
+                console.log(res);
+                loginUserHandler(res);
+                navigate('/');
+            })
+            .catch(() => {
+                setError('Invalid username or password');
+            })
+    }
+
     return (
         <>
             <Breadcrumb
@@ -11,28 +44,13 @@ export const Login = (params) => {
             />
 
             <FormWrapper title="Login">
-                <form>
+                <p>{error}</p>
+                <form onSubmit={submitHandler}>
                     <p>
-                        <input type="text" placeholder="Name" />
+                        <input onChange={inputChangeHandler} value={formState.email} name="email" type="email" placeholder="Email" />
                     </p>
                     <p>
-                        <input type="email" placeholder="Email" />
-                    </p>
-                    <p>
-                        <input type="number" placeholder="Address" />
-                    </p>
-                    <p>
-                        <input type="tel" placeholder="Phone" />
-                    </p>
-                    <p>
-                        <textarea
-                            name="bill"
-                            id="bill"
-                            cols={30}
-                            rows={10}
-                            placeholder="Say Something"
-                            defaultValue={""}
-                        />
+                        <input onChange={inputChangeHandler} value={formState.password} name="password" type="password" placeholder="Password" />
                     </p>
                     <p>
                         <input
