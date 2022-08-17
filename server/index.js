@@ -3,8 +3,8 @@ const express = require('express');
 
 const cors = require('./src/middlewares/cors');
 const auth = require('./src/middlewares/auth');
-const articlesController = require('./src/controllers/article');
-const usersController = require('./src/controllers/users');
+const articlesController = require('./src/controllers/articlesController');
+const usersController = require('./src/controllers/usersController');
 
 async function start() {
     try {

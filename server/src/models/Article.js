@@ -24,7 +24,11 @@ const articleSchema = new Schema({
         required: true,
         match: [/^https?:\/\/.+/, 'ImageUrl is not valid!']
     },
-    _ownerId: {
+    comments: [{
+        type: ObjectId,
+        ref: 'Comment'
+    }],
+    owner: {
         type: ObjectId,
         ref: 'User'
     }

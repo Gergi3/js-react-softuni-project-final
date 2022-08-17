@@ -10,7 +10,7 @@ function errorHandler(error, res, req) {
     message = error.message;
     res.status(error.code).json({ message });
   } else if (error.kind === 'ObjectId') {
-    return res.status(404).json({ message: 'Invalid id' });
+    return res.status(404).json({ message: 'Invalid article id' });
   } else if (error instanceof TypeError || error.name == 'MongoError' || error.name == 'ObjectParameterError') {
     message = error?.message;
     res.status(500).json({ message });

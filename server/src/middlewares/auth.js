@@ -1,4 +1,4 @@
-const { validateToken } = require('../services/user');
+const { validateToken } = require('../services/userServices');
 const { ValidationError } = require('../utils/createValidationError');
 const { errorHandler } = require('../utils/errorHandler');
 

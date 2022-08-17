@@ -9,7 +9,7 @@ module.exports = {
     isOwner: () => (req, res, next) => {
         if (!req.user) {
             res.status(401).json({ message: 'Unauthenticated' });
-        } else if (req.user._id == res.locals.item._ownerId) {
+        } else if (req.user._id == res.locals.item.owner) {
             next();
         } else {
             res.status(403).json({ message: 'Unauthorized' });

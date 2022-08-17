@@ -1,4 +1,4 @@
-const api = require('../services/user');
+const userServices = require('../services/userServices');
 const { errorHandler } = require('../utils/errorHandler');
 
 const router = require('express').Router();
@@ -8,7 +8,7 @@ router.post('/register', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const result = await api.register(email, password);
+        const result = await userServices.register(email, password);
         res.status(201).json(result);
     } catch (err) {
         errorHandler(err, res, req)
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const result = await api.login(email, password);
+        const result = await userServices.login(email, password);
         res.json(result);
     } catch (err) {
         errorHandler(err, res, req)
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    api.logout(req.user.token);
+    userServices.logout(req.user.token);
     res.status(204).end();
 });
 

@@ -28,7 +28,7 @@ async function getAll(query) {
   
     let articles = Article
         .find(buildedQuery)
-        .select('title summary description imageUrl createdAt updatedAt _ownerId')
+        .select('title summary description imageUrl createdAt updatedAt owner')
         .limit(limit)
         .skip(skipIndex)
         .sort(sortCriteria)
@@ -43,9 +43,9 @@ async function create(item) {
         summary: item.summary, 
         description: item.description, 
         imageUrl: item.imageUrl, 
-        _ownerId: item._ownerId
+        owner: item.owner
     });
-
+    
     await result.save();
 
     return result;
