@@ -27,7 +27,6 @@ export const Login = () => {
         e.preventDefault();
         authServices.login(formState.email, formState.password)
             .then(res => {
-                console.log(res);
                 loginUserHandler(res);
                 navigate('/');
             })

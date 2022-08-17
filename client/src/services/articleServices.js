@@ -6,6 +6,14 @@ export const getAll = (params) => {
     return api.get(endpoint);
 }
 
+export const getById = (id) => {
+    return api.get(`/data/articles/${id}`)
+}
+
 export const create = (data) => {
     return api.post('/data/articles', data)
+}
+
+export const editById = (id, data) => {
+    return api.put(`/data/articles/${id}`, data);
 }

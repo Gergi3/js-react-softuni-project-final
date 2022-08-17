@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as articleServices from '../../services/articleServices'
 
@@ -7,8 +7,9 @@ import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import './ArticleCreate.scss';
 
-export const ArticleCreate = (params) => {
-    const navigate = useNavigate();
+export const ArticleCreate = ({
+    isEdit
+}) => {
     const [error, setError] = useState(null);
     const [form, setForm] = useState({
         title: '',
@@ -16,6 +17,23 @@ export const ArticleCreate = (params) => {
         summary: '',
         description: '',
     })
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (isEdit) {
+            articleServices.getById(id)
+                .then(res => {
+                    setForm({
+                        title: res.title,
+                        imageUrl: res.imageUrl,
+                        summary: res.summary,
+                        description: res.description,
+                    })
+                })
+                .catch(err => navigate('/404'))
+        }
+    }, [id, isEdit, navigate])
 
     const inputChangeHandler = (e) => {
         setForm(old => ({
@@ -24,11 +42,18 @@ export const ArticleCreate = (params) => {
         }));
     }
     
-    const submitHandler = (e) => {
+    const createSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.create(form)
             .then(res => navigate('/articles'))
             .catch(err => setError(err.message))
+    }
+
+    const editSubmitHandler = (e) => {
+        e.preventDefault();
+        articleServices.editById(id, form)
+            .then(res => navigate(`/articles/${id}`))
+            .catch(err => setError(err.message));
     }
 
     return (
@@ -40,7 +65,7 @@ export const ArticleCreate = (params) => {
 
             <FormWrapper title="Create article">
                 <p>{error}</p>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={isEdit ? editSubmitHandler : createSubmitHandler}>
                     <p>
                         <input
                             type="text"
@@ -63,10 +88,8 @@ export const ArticleCreate = (params) => {
                         <textarea
                             onChange={inputChangeHandler}
                             value={form.summary}
-                            name="Summary"
+                            name="summary"
                             id="summary"
-                            cols={30}
-                            rows={10}
                             placeholder="Write a short summary"
                         />
                     </p>
@@ -76,8 +99,6 @@ export const ArticleCreate = (params) => {
                             value={form.description}
                             name="description"
                             id="description"
-                            cols={30}
-                            rows={10}
                             placeholder="Write a description"
                         />
                     </p>
@@ -85,7 +106,7 @@ export const ArticleCreate = (params) => {
                         <input
                             type="submit"
                             className="boxed-btn"
-                            defaultValue="Submit"
+                            value="Submit"
                         />
                     </p>
                 </form>

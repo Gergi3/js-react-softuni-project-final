@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.scss';
 
 export const Footer = () => {
@@ -9,16 +10,16 @@ export const Footer = () => {
                         <div className="col-lg-4 col-md-8">
                             <div className="footer-box about-widget">
                                 <h2 className="widget-title">About us</h2>
-                                <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                                <p>Blog with a lot of users that mainly make articles about games and others things. Create an account and join us in our journey!</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-8">
                             <div className="footer-box get-in-touch">
                                 <h2 className="widget-title">Get in Touch</h2>
                                 <ul>
-                                    <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                                    <li>support@fruitkha.com</li>
-                                    <li>+00 111 222 3333</li>
+                                    <li>Bulgaria, Sofia, Mladost, Ivan Enev 13</li>
+                                    <li>support@gaming.com</li>
+                                    <li>+359 89 444 5555</li>
                                 </ul>
                             </div>
                         </div>
@@ -26,10 +27,10 @@ export const Footer = () => {
                             <div className="footer-box pages">
                                 <h2 className="widget-title">Pages</h2>
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="news.html">News</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><Link to="/">Home</Link></li>
+                                    <li><Link to="/articles">Articles</Link></li>
+                                    <li><Link to="/about">About</Link></li>
+                                    <li><Link to="/contact">Contact</Link></li>
                                 </ul>
                             </div>
                         </div>

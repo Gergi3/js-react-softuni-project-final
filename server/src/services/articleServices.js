@@ -68,7 +68,7 @@ async function create(item) {
 }
 
 async function getById(id) {
-    return Article.findById(id);
+    return Article.findById(id).populate('owner');
 }
 
 async function updateById(existing, item) {

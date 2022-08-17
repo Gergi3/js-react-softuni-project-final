@@ -14,7 +14,6 @@ export const Home = () => {
     useEffect(() => {
         articleServices.getAll({limit})
             .then(res => {
-                console.log(res);
                 setArticles(res.articles);
                 setArticlesCount(res.count);
             })

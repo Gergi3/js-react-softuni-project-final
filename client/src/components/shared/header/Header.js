@@ -21,32 +21,31 @@ export const Header = () => {
                                 <ul>
                                     {/* className="current-list-item" */}
                                     <li >
-                                        <Link to="/articles">Articles</Link>
-                                        <ul className="sub-menu">
-                                            <li>
+                                        {user.accessToken
+                                            ? (
+                                                <ul className="sub-menu">
+                                                    <li>
+                                                        <Link to="/articles">Articles</Link>
+                                                    </li>
+
+                                                    <li>
+                                                        <Link to="/articles">My Articles</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to="/articles/create">Create Article</Link>
+                                                    </li>
+                                                </ul>
+                                            )
+                                            : (
                                                 <Link to="/articles">Articles</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/articles">My Articles</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/articles/create">Create Articles</Link>
-                                            </li>
-                                        </ul>
+                                            )
+                                        }
                                     </li>
                                     <li>
-                                        <Link to="#">Others</Link>
-                                        <ul className="sub-menu">
-                                            <li>
-                                                <Link to="/contact">Contact us</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/about">About us</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/404">404 page</Link>
-                                            </li>
-                                        </ul>
+                                        <Link to="/contact">Contact us</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/about">About us</Link>
                                     </li>
                                     {user.accessToken
                                         ? (

@@ -123,6 +123,9 @@
 }
 
 //Extra Spacing
+.mr-5 {
+  margin-right: 5px;
+}
 .mt-80 {
   margin-top: 80px;
   @include mq-down("tablet") {

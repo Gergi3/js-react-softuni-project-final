@@ -5,8 +5,8 @@ export const CommentsCreate = () => {
         <div className="comment-template">
             <h4>Leave a comment</h4>
             <p>
-                If you have a comment dont feel hesitate to send us your
-                opinion.
+                If you have a comment dont feel hesitate to send it.
+                We're a friendly community.
             </p>
             <form action="index.html">
                 <p>

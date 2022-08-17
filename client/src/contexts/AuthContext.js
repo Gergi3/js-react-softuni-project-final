@@ -14,8 +14,6 @@ export const AuthProvider = ({
     };
 
     const loginUserHandler = (userData) => {
-
-        console.log(userData);
         setUser(userData);
     };
 
