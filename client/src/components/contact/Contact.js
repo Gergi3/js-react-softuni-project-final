@@ -15,12 +15,9 @@ export const Contact = () => {
                     <div className="row">
                         <div className="col-lg-8 mb-5 mb-lg-0">
                             <div className="form-title">
-                                <h2>Have you any question?</h2>
+                                <h2>Have you got any question?</h2>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Pariatur, ratione! Laboriosam est, assumenda. Perferendis, quo
-                                    alias quaerat aliquid. Corporis ipsum minus voluptate? Dolore,
-                                    esse natus!
+                                    Send us an email with the form below. One of our assistants will try to contact you by mail as soon as possible.
                                 </p>
                             </div>
                             <div id="form_status" />
@@ -48,15 +45,11 @@ export const Contact = () => {
                                         <textarea
                                             name="message"
                                             id="message"
-                                            cols={30}
-                                            rows={10}
                                             placeholder="Message"
-                                            defaultValue={""}
                                         />
                                     </p>
-                                    <input type="hidden" name="token" defaultValue="FsWga4&@f6aw" />
                                     <p>
-                                        <input type="submit" defaultValue="Submit" />
+                                        <input type="submit" value="Send email" />
                                     </p>
                                 </form>
                             </div>
@@ -77,7 +70,7 @@ export const Contact = () => {
                                         <i className="fas fa-address-book" /> Contact
                                     </h4>
                                     <p>
-                                        Phone: +00 111 222 3333 <br /> Email: support@fruitkha.com
+                                        Phone: +359 89 444 5555 <br /> Email: support@gaming.com
                                     </p>
                                 </div>
                             </div>
