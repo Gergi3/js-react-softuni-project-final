@@ -27,6 +27,7 @@ export const App = () => {
                     <Route path="/articles/:id" element={<ArticleDetails />} />
                     <Route path="/articles/create" element={<ArticleCreate />} />
                     <Route path="/articles/edit/:id" element={<ArticleCreate isEdit={true} />} />
+                    <Route path="/articles/delete/:id" element={<ArticleCreate isDelete={true} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/logout" element={<Logout />} />

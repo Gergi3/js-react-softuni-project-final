@@ -17,3 +17,7 @@ export const create = (data) => {
 export const editById = (id, data) => {
     return api.put(`/data/articles/${id}`, data);
 }
+
+export const deleteById = (id) => {
+    return api.del(`/data/articles/${id}`);
+}

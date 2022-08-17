@@ -11,11 +11,12 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./ArticleDetails.scss"
 
 export const ArticleDetails = () => {
-    const { user } = useContext(AuthContext)
     const [article, setArticle] = useState({});
     const [recentArticles, setRecentArticles] = useState([]);
-    const navigate = useNavigate();
+    const [deleteIsPoppedUp, setDeletePoppedUp] = useState(false);
+    const { user } = useContext(AuthContext)
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         articleServices.getAll({ limit: 5, except: id })
@@ -29,6 +30,10 @@ export const ArticleDetails = () => {
             .catch(() => navigate('/404'));
     }, [id, navigate]);
 
+    const deleteArticleHandler = () => {
+        setDeletePoppedUp(true)
+    }
+
     return (
         <>
             <Breadcrumb
@@ -38,13 +43,14 @@ export const ArticleDetails = () => {
 
             <div className="mt-150 mb-150">
                 <div className="container">
+                
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="single-article-section">
                                 <div className="single-article-text">
                                     <div
                                         className="single-artcile-bg"
-                                        style={{backgroundImage: `url(${article.imageUrl})`}}
+                                        style={{ backgroundImage: `url(${article.imageUrl})` }}
                                     />
                                     <p className="blog-meta">
                                         <span className="author">
@@ -54,14 +60,19 @@ export const ArticleDetails = () => {
                                             <i className="fas fa-calendar" /> {parseDate(article.createdAt)}
                                         </span>
                                         <span className="date">
-                                            <Link className="boxed-btn mr-5" to={`/articles/edit/${article._id}`}>Edit</Link>
-                                            <Link className="boxed-btn" to={`/articles/delete/${article._id}`}>Delete</Link>
+                                            {user._id === article.owner?._id &&
+                                                    <>
+                                                        <Link className="boxed-btn mr-5" to={`/articles/edit/${article._id}`}>Edit</Link>
+                                                        <Link className="boxed-btn" to={`/articles/delete/${article._id}`}>Delete</Link>
+                                                    </>
+                                            }
                                         </span>
                                     </p>
                                     <h2>{article.title}</h2>
                                     <p>
                                         {article.description}
                                     </p>
+                                    
                                 </div>
                                 <CommentsList />
                                 {user.accessToken
@@ -71,7 +82,7 @@ export const ArticleDetails = () => {
                                         or if you dont have an account you can go <Link to="/users/register">register</Link> one.
                                     </p>
                                 }
-                                
+
                             </div>
                         </div>
                         <div className="col-lg-4">
