@@ -1,7 +1,7 @@
 import * as api from '../api/requester';
 
-export const getAll = (page = '', limit = '', sort = '', order = '', search = '', criteria = '') => {
-    const endpoint = `/data/articles?page=${page}&limit=${limit}&sort=${sort}&order=${order}&search=${search}&criteria=${criteria}`;
-    console.log(endpoint);
+export const getAll = (params) => {
+    const { page, limit, sort, order, search, criteria, except } = params;
+    const endpoint = `/data/articles?page=${page || ''}&limit=${limit || ''}&sort=${sort || ''}&order=${order || ''}&search=${search || ''}&criteria=${criteria || ''}&except=${except || ''}`;
     return api.get(endpoint);
 }

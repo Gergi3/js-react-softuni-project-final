@@ -3,7 +3,7 @@
 # Hover Styles
 
 ----------------------------------------------------------------------------- */
-a {
+a, button {
   &.navbar-brand {
     transition: 0.3s;
 
@@ -126,11 +126,11 @@ input[type="submit"] {
 }
 
 .pagination-wrap ul li {
-  a {
+  button {
     transition: 0.3s;
   }
 
-  &:hover a {
+  &:hover button {
     background-color: #f28123;
   }
 }

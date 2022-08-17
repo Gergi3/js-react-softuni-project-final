@@ -1,4 +1,6 @@
-import { parseDate } from "../../../helpers/appHelpers";
+import { Link } from 'react-router-dom';
+
+import { parseDate } from "../../../../helpers/appHelpers";
 
 export const ArticleItem = ({
     article
@@ -6,12 +8,12 @@ export const ArticleItem = ({
     return (
         <div className="col-lg-4 col-md-6">
             <div className="single-latest-news">
-                <a href="/articles/single">
+                <Link to={`/articles/${article._id}`}>
                     <div className="latest-news-bg" style={{backgroundImage: `url(${article.imageUrl})`}} />
-                </a>
+                </Link>
                 <div className="news-text-box">
                     <h3>
-                        <a href="/articles/single">{article.title}</a>
+                        <Link to={`/articles/${article._id}`}>{article.title}</Link>
                     </h3>
                     <p className="blog-meta">
                         <span className="author">
@@ -22,9 +24,9 @@ export const ArticleItem = ({
                         </span>
                     </p>
                     <p className="excerpt">{article.summary}</p>
-                    <a href={`/articles/${article._id}`} className="read-more-btn">
+                    <Link to={`/articles/${article._id}`} className="read-more-btn">
                         Read more <i className="fas fa-angle-right" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

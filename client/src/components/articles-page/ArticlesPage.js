@@ -1,8 +1,29 @@
+import { useEffect, useState } from 'react';
+
+import * as articleServices from '../../services/articleServices';
+
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
-import { ArticlesList } from '../articles-list/ArticlesList'
+import { Pagination } from '../pagination/Pagination';
+import { ArticlesList } from '../shared/articles-list/ArticlesList';
 import './ArticlesPage.scss';
 
 export const ArticlesPage = () => {
+    const [articles, setArticles] = useState([]);
+    const [articlesCount, setArticlesCount] = useState(1);
+    const [page, setPage] = useState(1)
+    
+    useEffect(() => {
+        articleServices.getAll({limit: 3, page})
+            .then(res => {
+                setArticles(res.articles);
+                setArticlesCount(res.count);
+            })
+    }, [page]);
+
+    const changePageHandler = (newPage) => {
+        setPage(newPage);
+    }
+
     return (
         <>
             <Breadcrumb
@@ -22,7 +43,13 @@ export const ArticlesPage = () => {
                     </div>
                 </div>
                 
-                <ArticlesList pagination={true} />
+                <ArticlesList articles={articles} />
+
+                <Pagination
+                    changePageHandler={changePageHandler}
+                    articlesCount={articlesCount}
+                    page={page}
+                />
             </div>
         </>
     );

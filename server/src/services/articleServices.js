@@ -9,6 +9,7 @@ async function getAll(query) {
     const order = query?.order; // desc/asc
     const search = query?.search; // asdasd
     const criteria = (query?.criteria || '').trim(); // summary
+    const except = (query?.except || '').trim(); // summary
     const skipIndex = (page - 1) * limit;
   
     const sortCriteria = {};
@@ -25,8 +26,22 @@ async function getAll(query) {
     if (search && search !== 'null' && criteria && criteria !== 'null') {
       buildedQuery[criteria] = criteria == '_id' ? search : new RegExp(search, 'i');
     }
-  
-    let articles = Article
+
+    let excluded;
+
+    if (except) {
+        try {
+            excluded = except.split(',');
+        } catch {
+            excluded = [];
+        }
+    }
+    
+    let count = await Article.countDocuments();
+    let articles = await Article
+        .find({
+            _id: { $nin: excluded }
+        })
         .find(buildedQuery)
         .select('title summary description imageUrl createdAt updatedAt owner')
         .limit(limit)
@@ -35,7 +50,7 @@ async function getAll(query) {
         .populate('owner', 'email')
         .lean();
 
-    return articles;
+    return { articles, count };
 }
 
 async function create(item) {
