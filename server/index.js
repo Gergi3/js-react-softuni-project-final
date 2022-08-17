@@ -3,7 +3,7 @@ const express = require('express');
 
 const cors = require('./src/middlewares/cors');
 const auth = require('./src/middlewares/auth');
-const furnitureController = require('./src/controllers/article');
+const articlesController = require('./src/controllers/article');
 const usersController = require('./src/controllers/users');
 
 async function start() {
@@ -23,7 +23,7 @@ async function start() {
     app.use(cors());
     app.use(auth());
 
-    app.use('/data/catalog', furnitureController);
+    app.use('/data/articles', articlesController);
     app.use('/users', usersController);
 
     app.listen(3030, () => console.log('REST Service started on port 3030'));
