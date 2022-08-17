@@ -2,42 +2,45 @@ const router = require('express').Router();
 
 const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
-const api = require('../services/furniture');
-const errorMapper = require('../util/errorMapper');
+const api = require('../services/article');
+const { errorHandler } = require('../util/errorHandler');
 
 
 router.get('/', async (req, res) => {
     try {
-        res.json(await api.getAll(req.query.where));
+        res.status(200).json(await api.getAll(req.query));
     } catch (err) {
-        res.status(400).json({ message: 'Bad request' });
+        if (err.kind === 'ObjectId') {
+            return res.status(200).json({ users: [], count: 0 });
+        }
+        console.log(err);
+        errorHandler(err, res, req)
     }
 });
 
 router.post('/', isAuth(), async (req, res) => {
     const item = {
-        make: req.body.make,
-        model: req.body.model,
-        year: req.body.year,
+        title: req.body.title,
+        summary: req.body.summary,
+        imageUrl: req.body.imageUrl,
         description: req.body.description,
-        price: req.body.price,
-        img: req.body.img,
-        material: req.body.material,
         _ownerId: req.user._id
     };
 
     try {
         const result = await api.create(item);
-        res.json(result);
+        res.status(200).json(result);
     } catch (err) {
-        console.error(err);
-        const message = errorMapper(err);
-        res.status(400).json({ message });
+        errorHandler(err, res, req)
     }
 });
 
 router.get('/:id', preload(api), (req, res) => {
-    res.json(res.locals.item);
+    try {
+        res.json(res.locals.item);
+    } catch (err) {
+        errorHandler(err, res, req);
+    }
 });
 
 router.put('/:id', preload(api), isOwner(), async (req, res) => {
@@ -45,8 +48,7 @@ router.put('/:id', preload(api), isOwner(), async (req, res) => {
         const result = await api.updateById(res.locals.item, req.body);
         res.json(result);
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ message: 'Request error' });
+        errorHandler(err, res, req)
     }
 });
 

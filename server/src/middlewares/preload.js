@@ -1,3 +1,6 @@
+const { errorHandler } = require('../util/errorHandler')
+const { ValidationError } = require('../util/createValidationError')
+
 module.exports = (api) => async (req, res, next) => {
     const id = req.params.id;
 
@@ -7,9 +10,9 @@ module.exports = (api) => async (req, res, next) => {
             res.locals.item = item;
             next();
         } else {
-            res.status(404).json({ message: `Item ${id} not found` });
+            throw new ValidationError(`Item ${id} not found.`, 404);
         }
-    } catch (err) { 
-        res.status(404).json({ message: `Item ${id} not found` });
+    } catch (err) {
+        errorHandler(err, res, req);
     }
 };
