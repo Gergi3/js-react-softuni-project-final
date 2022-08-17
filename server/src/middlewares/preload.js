@@ -1,5 +1,5 @@
-const { errorHandler } = require('../util/errorHandler')
-const { ValidationError } = require('../util/createValidationError')
+const { errorHandler } = require('../utils/errorHandler')
+const { ValidationError } = require('../utils/createValidationError')
 
 module.exports = (api) => async (req, res, next) => {
     const id = req.params.id;

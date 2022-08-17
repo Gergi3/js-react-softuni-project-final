@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
 const api = require('../services/article');
-const { errorHandler } = require('../util/errorHandler');
+const { errorHandler } = require('../utils/errorHandler');
 
 
 router.get('/', async (req, res) => {
@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
         if (err.kind === 'ObjectId') {
             return res.status(200).json({ users: [], count: 0 });
         }
-        console.log(err);
         errorHandler(err, res, req)
     }
 });
@@ -59,8 +58,7 @@ router.delete('/:id', preload(api), isAuth(), isOwner(), async (req, res) => {
         const result = await api.deleteById(id);
         res.json(result);
     } catch (err) {
-        console.error(err);
-        res.status(404).json({ message: `Item ${id} not found` });
+        errorHandler(err, res, req)
     }
 });
 

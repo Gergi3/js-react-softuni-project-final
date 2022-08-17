@@ -1,4 +1,6 @@
 const { validateToken } = require('../services/user');
+const { ValidationError } = require('../utils/createValidationError');
+const { errorHandler } = require('../utils/errorHandler');
 
 
 module.exports = () => (req, res, next) => {
@@ -14,8 +16,8 @@ module.exports = () => (req, res, next) => {
                 token
             };
         } catch (err) {
-            console.error(err);
-            return res.status(401).json({ message: 'Invalid access token. Please log in'});
+            let newErr = new ValidationError('Invalid access token. Please log in', 401);
+            errorHandler(newErr, res, req)
         }
     }
 

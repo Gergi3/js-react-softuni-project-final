@@ -1,4 +1,5 @@
 const api = require('../services/user');
+const { errorHandler } = require('../utils/errorHandler');
 
 const router = require('express').Router();
 
@@ -10,8 +11,7 @@ router.post('/register', async (req, res) => {
         const result = await api.register(email, password);
         res.status(201).json(result);
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ message: err.message });
+        errorHandler(err, res, req)
     }
 });
 
@@ -22,8 +22,7 @@ router.post('/login', async (req, res) => {
         const result = await api.login(email, password);
         res.json(result);
     } catch (err) {
-        console.error(err);
-        res.status(400).json({ message: err.message });
+        errorHandler(err, res, req)
     }
 });
 

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const { ValidationError } = require('../utils/createValidationError');
 
 
 const blacklist = new Set();
@@ -12,7 +13,7 @@ async function register(email, password) {
     const existing = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
     if (existing) {
-        throw new Error('Email is taken');
+        throw new ValidationError('Email is taken', 403);
     }
 
     // hash password
@@ -34,14 +35,14 @@ async function login(email, password) {
     const user = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
     if (!user) {
-        throw new Error('Incorrect email or password');
+        throw new ValidationError('Incorrect email or password', 403);
     }
 
     // verify password
     const match = await bcrypt.compare(password, user.hashedPassword);
 
     if (!match) {
-        throw new Error('Incorrect email or password');
+        throw new ValidationError('Incorrect email or password', 403);
     }
 
     return createSession(user);
@@ -68,7 +69,7 @@ function createSession(user) {
 
 function validateToken(token) {
     if (blacklist.has(token)) {
-        throw new Error('Token is blacklisted');
+        throw new ValidationError('Token is blacklisted', 401);
     }
     return jwt.verify(token, JWT_SECRET);
 }

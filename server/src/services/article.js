@@ -1,5 +1,5 @@
 const Article = require('../models/Article');
-const { ValidationError } = require('../util/createValidationError');
+const { ValidationError } = require('../utils/createValidationError');
 
 
 async function getAll(query) {
@@ -15,7 +15,7 @@ async function getAll(query) {
 
     let buildedQuery = {};
     if (criteria === 'createdAt' || criteria === 'updatedAt') {
-        throw new ValidationError('You cannot serach by createdAt or updatedAt.', 500)
+        throw new ValidationError('You cannot serach by createdAt or updatedAt.', 403)
     }
     
     if (sort && sort !== 'null' && order && order !== 'null') {
