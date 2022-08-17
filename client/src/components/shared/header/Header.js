@@ -23,18 +23,21 @@ export const Header = () => {
                                     <li >
                                         {user.accessToken
                                             ? (
-                                                <ul className="sub-menu">
-                                                    <li>
-                                                        <Link to="/articles">Articles</Link>
-                                                    </li>
+                                                <>
+                                                    <Link to="/articles">Articles</Link>
+                                                    <ul className="sub-menu">
+                                                        <li>
+                                                            <Link to="/articles">Articles</Link>
+                                                        </li>
 
-                                                    <li>
-                                                        <Link to="/articles">My Articles</Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/articles/create">Create Article</Link>
-                                                    </li>
-                                                </ul>
+                                                        <li>
+                                                            <Link to="/articles">My Articles</Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/articles/create">Create Article</Link>
+                                                        </li>
+                                                    </ul>
+                                                </>
                                             )
                                             : (
                                                 <Link to="/articles">Articles</Link>
