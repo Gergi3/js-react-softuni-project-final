@@ -31,7 +31,7 @@ export const Header = () => {
                                                         </li>
 
                                                         <li>
-                                                            <Link to="/articles">My Articles</Link>
+                                                            <Link to="/my-articles">My Articles</Link>
                                                         </li>
                                                         <li>
                                                             <Link to="/articles/create">Create Article</Link>

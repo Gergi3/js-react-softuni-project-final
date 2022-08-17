@@ -11,7 +11,7 @@ export const ArticlesList = ({
                     ? articles.map(article => (
                         <ArticleItem key={article._id} article={article} />
                     ))
-                    : <h1>Loading articles..</h1>
+                    : <h1>No articles found yet..</h1>
                 }
             </div>
         </div>

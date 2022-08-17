@@ -24,8 +24,9 @@ async function getAll(query) {
     }
   
     if (search && search !== 'null' && criteria && criteria !== 'null') {
-      buildedQuery[criteria] = criteria == '_id' ? search : new RegExp(search, 'i');
+      buildedQuery[criteria] = criteria == '_id' || criteria == 'owner' ? search : new RegExp(search, 'i');
     }
+
 
     let excluded;
 
@@ -36,8 +37,13 @@ async function getAll(query) {
             excluded = [];
         }
     }
-    
+
     let count = await Article.countDocuments();
+
+    if (search == '' && criteria == 'owner') {
+        return { articles: [], count };
+    }
+
     let articles = await Article
         .find({
             _id: { $nin: excluded }

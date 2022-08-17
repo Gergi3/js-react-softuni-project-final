@@ -8,11 +8,11 @@ import './Home.scss'
 
 export const Home = () => {
     const [articles, setArticles] = useState([]);
-    const [articlesCount, setArticlesCount] = useState(1);
+    const [articlesCount, setArticlesCount] = useState(0);
     const [limit, setLimit] = useState(3);
-    
+
     useEffect(() => {
-        articleServices.getAll({limit})
+        articleServices.getAll({ limit })
             .then(res => {
                 setArticles(res.articles);
                 setArticlesCount(res.count);
@@ -23,7 +23,9 @@ export const Home = () => {
     const onMoreClickHandler = () => {
         setLimit(old => Number(old) + 3);
     }
-    
+
+    const hasMoreArticles = articlesCount === articles.length;
+
     return (
         <>
             <div className="hero-area hero-bg">
@@ -61,12 +63,15 @@ export const Home = () => {
 
                 <ArticlesList articles={articles} />
 
-                {articlesCount === articles.length
-                    ? <h4 className="pb-100" >
+                {hasMoreArticles && articlesCount !== 0 &&
+                    <h4 className="pb-100" >
                         Looks like you've gone through everything. You can click on an article to read it or&nbsp;
                         <Link to="/articles/create">create</Link> your own article.
                     </h4>
-                    : <div className="row pb-100">
+                }
+
+                {!hasMoreArticles && articlesCount !== 0 &&
+                    <div className="row pb-100">
                         <div className="col-lg-12 text-center">
                             <button className="boxed-btn" onClick={onMoreClickHandler}>More News</button>
                         </div>

@@ -1,24 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import * as articleServices from '../../services/articleServices';
 
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { Pagination } from '../pagination/Pagination';
 import { ArticlesList } from '../shared/articles-list/ArticlesList';
+import { AuthContext } from '../../contexts/AuthContext';
 import './ArticlesPage.scss';
 
-export const ArticlesPage = () => {
+export const ArticlesPage = ({
+    isUserArticles
+}) => {
     const [articles, setArticles] = useState([]);
     const [articlesCount, setArticlesCount] = useState(1);
     const [page, setPage] = useState(1)
-    
+    const { user } = useContext(AuthContext)
+
     useEffect(() => {
-        articleServices.getAll({limit: 3, page})
+        let query = {limit: 3, page}
+        if (isUserArticles && user) {
+            query.criteria = 'owner';
+            query.search = user._id;
+        }
+        console.log(query);
+        articleServices.getAll(query)
             .then(res => {
                 setArticles(res.articles);
                 setArticlesCount(res.count);
             })
-    }, [page]);
+    }, [isUserArticles, page, user]);
 
     const changePageHandler = (newPage) => {
         setPage(newPage);
