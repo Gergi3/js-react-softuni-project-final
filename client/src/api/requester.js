@@ -13,6 +13,11 @@ function requester(method, endpoint, data) {
         }
     }
 
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.accessToken) {
+        options.headers['X-Authorization'] = user.accessToken;
+    }
+
     return fetch(`${baseUrl}${endpoint}`, options)
         .then(res => res.json())
         .catch(err => console.error(err));

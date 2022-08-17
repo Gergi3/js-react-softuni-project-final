@@ -13,26 +13,29 @@ import { Register } from './components/register/Register';
 import { Logout } from './components/logout/Logout';
 import { NotFound } from './components/not-found/NotFound';
 import './App.scss';
+import { AuthProvider } from './contexts/AuthContext';
 
 export const App = () => {
     return (
         <div>
-            <Header />
+            <AuthProvider>
+                <Header />
+                
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/articles" element={<ArticlesPage />} />
+                    <Route path="/articles/single" element={<ArticleDetails />} />
+                    <Route path="/articles/create" element={<ArticleCreate />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/articles" element={<ArticlesPage />} />
-                <Route path="/articles/single" element={<ArticleDetails />} />
-                <Route path="/articles/create" element={<ArticleCreate />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-
-            <Footer />
+                <Footer />
+            </AuthProvider>
         </div>
     );
 }
