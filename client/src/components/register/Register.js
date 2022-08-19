@@ -68,7 +68,7 @@ export const Register = () => {
                         <input
                             type="submit"
                             className="boxed-btn"
-                            value="Submit"
+                            value="Register"
                             disabled={!isValidUser(formState)}
                         />
                     </p>
