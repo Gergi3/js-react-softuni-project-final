@@ -7,7 +7,12 @@ const userSchema = new Schema({
         required: true,
         match: [/^[A-Za-z0-9_\.]+@[A-Za-z]+\.[A-Za-z]{2,3}$/, 'Email is not valid!'],
     },
-    hashedPassword: { type: String, required: true }
+    hashedPassword: {
+        type: String,
+        required: true,
+        min: 3,
+        max: 18
+    }
 });
 
 userSchema.index({ email: 1 }, {

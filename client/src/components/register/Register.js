@@ -2,14 +2,16 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as authServices from '../../services/authServices';
+import { isValidUser, validateUserInput } from '../../validators/userValidator'
 
+import { FormInput } from '../shared/form-input/FormInput';
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { AuthContext } from '../../contexts/AuthContext';
 import './Register.scss';
 
-export const Register = (params) => {
-    const [error, setError] = useState(null);
+export const Register = () => {
+    const [emailIsTaken, setEmailIsTaken] = useState(false);
     const [formState, setFormState] = useState({
         email: '',
         password: ''
@@ -31,8 +33,9 @@ export const Register = (params) => {
                 loginUserHandler(res);
                 navigate('/');
             })
-            .catch(err => setError(err.message))
+            .catch(() => setEmailIsTaken(true));
     }
+
     return (
         <>
             <Breadcrumb
@@ -41,31 +44,32 @@ export const Register = (params) => {
             />
 
             <FormWrapper title="Register">
-                <p>{error}</p>
+                {emailIsTaken &&
+                    <p className="form-error">User with this email is already registered</p>
+                }
                 <form onSubmit={submitHandler}>
-                    <p>
-                        <input
-                            onChange={inputChangeHandler}
-                            value={formState.email}
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                        />
-                    </p>
-                    <p>
-                        <input
-                            onChange={inputChangeHandler}
-                            value={formState.password}
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                        />
-                    </p>
+                    <FormInput
+                        value={formState.email}
+                        name="email"
+                        type="text"
+                        placeholder="Email"
+                        changeHandler={inputChangeHandler}
+                        validator={validateUserInput}
+                    />
+                    <FormInput
+                        value={formState.password}
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        changeHandler={inputChangeHandler}
+                        validator={validateUserInput}
+                    />
                     <p>
                         <input
                             type="submit"
                             className="boxed-btn"
-                            defaultValue="Submit"
+                            value="Submit"
+                            disabled={!isValidUser(formState)}
                         />
                     </p>
                 </form>
