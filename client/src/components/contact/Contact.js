@@ -9,7 +9,7 @@ export const Contact = () => {
                 title="Contact us"
                 secondaryTitle="Have any questions?"
             />
-            
+
             <div className="contact-from-section mt-150 mb-150">
                 <div className="container">
                     <div className="row">

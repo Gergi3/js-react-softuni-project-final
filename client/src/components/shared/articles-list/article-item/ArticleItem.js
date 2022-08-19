@@ -9,7 +9,7 @@ export const ArticleItem = ({
         <div className="col-lg-4 col-md-6">
             <div className="single-latest-news">
                 <Link to={`/articles/${article._id}`}>
-                    <div className="latest-news-bg" style={{backgroundImage: `url(${article.imageUrl})`}} />
+                    <div className="latest-news-bg" style={{ backgroundImage: `url(${article.imageUrl})` }} />
                 </Link>
                 <div className="news-text-box">
                     <h3>

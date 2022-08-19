@@ -17,12 +17,12 @@ export const ArticlesPage = ({
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        let query = {limit: 3, page}
+        let query = { limit: 3, page }
         if (isUserArticles && user) {
             query.criteria = 'owner';
             query.search = user._id;
         }
-        console.log(query);
+
         articleServices.getAll(query)
             .then(res => {
                 setArticles(res.articles);
@@ -40,7 +40,7 @@ export const ArticlesPage = ({
                 title="Articles"
                 secondaryTitle="The best of the best"
             />
-            
+
             <div className="container">
                 <div className="col-lg-8 col-md-8 mx-auto pt-50">
                     <div className="footer-box subscribe">
@@ -52,7 +52,7 @@ export const ArticlesPage = ({
                         </form>
                     </div>
                 </div>
-                
+
                 <ArticlesList articles={articles} />
 
                 <Pagination

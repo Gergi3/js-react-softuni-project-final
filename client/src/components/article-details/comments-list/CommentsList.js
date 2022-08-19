@@ -6,7 +6,6 @@ export const CommentsList = () => {
         <div className="comments-list-wrap">
             <h3 className="comment-count-title">3 Comments</h3>
             <div className="comment-list">
-                
                 <CommentsItem />
                 <CommentsItem />
                 <CommentsItem />
@@ -55,5 +54,5 @@ export const CommentsList = () => {
 //                             </p>
 //                         </div>
 //                     </div>
-//                 </div> 
+//                 </div>
 // }

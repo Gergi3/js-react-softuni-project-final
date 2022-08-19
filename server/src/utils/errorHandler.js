@@ -5,6 +5,10 @@ function createErrorMessage(error) {
 }
 
 function errorHandler(error, res, req) {
+  if (!error) {
+    return;
+  }
+  
   let message = 'Something went wrong!';
   if (error.name === 'CustomValidationError') {
     message = error.message;

@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+
 import * as authServices from '../../services/authServices';
 
+import { AuthContext } from '../../contexts/AuthContext';
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import './Login.scss';
@@ -30,9 +31,7 @@ export const Login = () => {
                 loginUserHandler(res);
                 navigate('/');
             })
-            .catch(() => {
-                setError('Invalid username or password');
-            })
+            .catch(err => setError(err.message))
     }
 
     return (
@@ -46,10 +45,22 @@ export const Login = () => {
                 <p>{error}</p>
                 <form onSubmit={submitHandler}>
                     <p>
-                        <input onChange={inputChangeHandler} value={formState.email} name="email" type="email" placeholder="Email" />
+                        <input
+                            onChange={inputChangeHandler}
+                            value={formState.email}
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                        />
                     </p>
                     <p>
-                        <input onChange={inputChangeHandler} value={formState.password} name="password" type="password" placeholder="Password" />
+                        <input
+                            onChange={inputChangeHandler}
+                            value={formState.password}
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                        />
                     </p>
                     <p>
                         <input

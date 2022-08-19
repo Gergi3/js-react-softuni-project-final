@@ -15,7 +15,7 @@ export const FormWrapper = ({
                                     <div className="card-header" id="headingOne">
                                         <h4 className="pt-40 pl-35">{title}</h4>
                                     </div>
-                                    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div className="collapse show">
                                         <div className="card-body">
                                             <div className="billing-address-form">
                                                 {children}

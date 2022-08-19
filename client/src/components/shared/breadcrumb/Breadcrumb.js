@@ -1,11 +1,11 @@
 import './Breadcrumb.scss';
 
 export const Breadcrumb = ({
-    title,
-    secondaryTitle,
+	title,
+	secondaryTitle,
 }) => {
-    return (
-        <div className="breadcrumb-section breadcrumb-bg">
+	return (
+		<div className="breadcrumb-section breadcrumb-bg">
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-8 offset-lg-2 text-center">
@@ -17,5 +17,5 @@ export const Breadcrumb = ({
 				</div>
 			</div>
 		</div>
-    );
+	);
 };

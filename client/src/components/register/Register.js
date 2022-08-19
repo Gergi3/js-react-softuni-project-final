@@ -31,9 +31,7 @@ export const Register = (params) => {
                 loginUserHandler(res);
                 navigate('/');
             })
-            .catch(() => {
-                setError('Email already registered.');
-            })
+            .catch(err => setError(err.message))
     }
     return (
         <>
@@ -42,15 +40,26 @@ export const Register = (params) => {
                 secondaryTitle="Sign up for an account here"
             />
 
-
             <FormWrapper title="Register">
                 <p>{error}</p>
                 <form onSubmit={submitHandler}>
                     <p>
-                        <input onChange={inputChangeHandler} value={formState.email} name="email" type="email" placeholder="Email" />
+                        <input
+                            onChange={inputChangeHandler}
+                            value={formState.email}
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                        />
                     </p>
                     <p>
-                        <input onChange={inputChangeHandler} value={formState.password} name="password" type="password" placeholder="Password" />
+                        <input
+                            onChange={inputChangeHandler}
+                            value={formState.password}
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                        />
                     </p>
                     <p>
                         <input

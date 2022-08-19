@@ -24,6 +24,6 @@ export const AuthProvider = ({
             logoutUserHandler,
         }}>
             {children}
-        </AuthContext.Provider>  
+        </AuthContext.Provider>
     );
 };

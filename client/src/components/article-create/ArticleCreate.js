@@ -18,8 +18,8 @@ export const ArticleCreate = ({
         summary: '',
         description: '',
     })
-    const navigate = useNavigate();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isEdit || isDelete) {
@@ -42,25 +42,25 @@ export const ArticleCreate = ({
             [e.target.name]: e.target.value
         }));
     }
-    
+
     const createSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.create(form)
-            .then(res => navigate('/articles'))
+            .then(() => navigate('/articles'))
             .catch(err => setError(err?.message))
     }
 
     const editSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.editById(id, form)
-            .then(res => navigate(`/articles/${id}`))
+            .then(() => navigate(`/articles/${id}`))
             .catch(err => setError(err?.message));
     }
 
     const deleteSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.deleteById(id)
-            .then(res => navigate('/articles'))
+            .then(() => navigate('/articles'))
             .then(err => setError(err?.message));
     }
 

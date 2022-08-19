@@ -51,8 +51,6 @@ export const Home = () => {
                 </div>
             </div>
 
-
-
             <div className="container">
                 <div className="col-lg-8 offset-lg-2 text-center pt-100">
                     <div className="section-title">

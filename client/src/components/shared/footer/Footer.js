@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import './Footer.scss';
 
 export const Footer = () => {
@@ -42,7 +43,7 @@ export const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6 col-md-12">
-                            <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+                            <p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>, All Rights Reserved.</p>
                         </div>
                         <div className="col-lg-6 text-right col-md-12">
                             <div className="social-icons">

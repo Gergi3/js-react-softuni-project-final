@@ -43,7 +43,7 @@ export const ArticleDetails = () => {
 
             <div className="mt-150 mb-150">
                 <div className="container">
-                
+
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="single-article-section">
@@ -61,10 +61,10 @@ export const ArticleDetails = () => {
                                         </span>
                                         <span className="date">
                                             {user._id === article.owner?._id &&
-                                                    <>
-                                                        <Link className="boxed-btn mr-5" to={`/articles/edit/${article._id}`}>Edit</Link>
-                                                        <Link className="boxed-btn" to={`/articles/delete/${article._id}`}>Delete</Link>
-                                                    </>
+                                                <>
+                                                    <Link className="boxed-btn mr-5" to={`/articles/edit/${article._id}`}>Edit</Link>
+                                                    <Link className="boxed-btn" to={`/articles/delete/${article._id}`}>Delete</Link>
+                                                </>
                                             }
                                         </span>
                                     </p>
@@ -72,14 +72,14 @@ export const ArticleDetails = () => {
                                     <p>
                                         {article.description}
                                     </p>
-                                    
+
                                 </div>
                                 <CommentsList />
                                 {user.accessToken
                                     ? <CommentsCreate />
                                     : <p>
-                                        If you want to leave a comment you need to <Link to="/users/login">log in</Link> your account
-                                        or if you dont have an account you can go <Link to="/users/register">register</Link> one.
+                                        If you want to leave a comment you need to <Link to="/login">log in</Link> your account
+                                        or if you dont have an account you can go <Link to="/register">register</Link> one.
                                     </p>
                                 }
 

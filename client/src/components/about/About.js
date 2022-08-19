@@ -9,6 +9,7 @@ export const About = () => {
                 title="About us"
                 secondaryTitle="Get to know us better"
             />
+
             <div className="feature-bg">
                 <div className="container">
                     <div className="row">
