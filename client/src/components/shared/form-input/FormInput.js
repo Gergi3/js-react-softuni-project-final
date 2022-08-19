@@ -7,22 +7,42 @@ export const FormInput = ({
     value,
     name,
     type,
-    placeholder
+    placeholder,
+    disabled,
+    isTextarea
 }) => {
     const [isBlurred, setIsBlurred] = useState(true);
     const errors = validator(name, value)
 
     return (
         <p>
-            <input
-                value={value}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                onChange={changeHandler}
-                onBlur={setIsBlurred.bind(null, true)}
-                onFocus={setIsBlurred.bind(null, false)}
-            />
+            {!isTextarea
+                ? (
+                    <input
+                        value={value}
+                        name={name}
+                        type={type}
+                        placeholder={placeholder}
+                        onChange={changeHandler}
+                        onBlur={setIsBlurred.bind(null, true)}
+                        onFocus={setIsBlurred.bind(null, false)}
+                        disabled={disabled}
+                    />
+                )
+                : (
+                    <textarea
+                        value={value}
+                        name={name}
+                        type={type}
+                        placeholder={placeholder}
+                        onChange={changeHandler}
+                        onBlur={setIsBlurred.bind(null, true)}
+                        onFocus={setIsBlurred.bind(null, false)}
+                        disabled={disabled}
+                    />
+                )
+            }
+
             {value !== '' && isBlurred &&
                 errors.map(error => <span key={error} className="form-error">{error}</span>)
             }
