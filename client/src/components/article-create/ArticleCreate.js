@@ -2,17 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import * as articleServices from '../../services/articleServices'
+import { validateArticleInput, isValidArticle } from '../../validators/articleValidator'
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
+import { FormInput } from "../shared/form-input/FormInput";
 import './ArticleCreate.scss';
 
 export const ArticleCreate = ({
     isEdit,
     isDelete
 }) => {
-    const [error, setError] = useState(null);
     const [game, setGame] = useState({});
     const [form, setForm] = useState({
         title: '',
@@ -25,25 +26,26 @@ export const ArticleCreate = ({
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isEdit || isDelete) {
-            articleServices.getById(id)
-                .then(res => {
-                    setForm({
-                        title: res.title,
-                        imageUrl: res.imageUrl,
-                        summary: res.summary,
-                        description: res.description,
-                    })
-                    setGame(res);
-                })
-                .catch(err => navigate('/404'))
+        if (!isEdit && !isDelete) {
+            return
         }
+
+        articleServices.getById(id)
+            .then(res => {
+                setForm({
+                    title: res.title,
+                    imageUrl: res.imageUrl,
+                    summary: res.summary,
+                    description: res.description,
+                })
+                setGame(res);
+            })
+            .catch(() => navigate('/404'))
     }, [id, isDelete, isEdit, navigate]);
 
-    if ((isEdit || isDelete) && user._id === game.owner._id) {
+    if (game.owner && user && (isEdit || isDelete) && user._id !== game.owner._id) {
         return <Navigate to="/login" replace={true} />
     }
-
 
     const inputChangeHandler = (e) => {
         setForm(old => ({
@@ -56,21 +58,21 @@ export const ArticleCreate = ({
         e.preventDefault();
         articleServices.create(form)
             .then(() => navigate('/articles'))
-            .catch(err => setError(err?.message))
+            .catch(err => console.log(err))
     }
 
     const editSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.editById(id, form)
             .then(() => navigate(`/articles/${id}`))
-            .catch(err => setError(err?.message));
+            .catch(err => console.log(err));
     }
 
     const deleteSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.deleteById(id)
             .then(() => navigate('/articles'))
-            .then(err => setError(err?.message));
+            .then(err => console.log(err));
     }
 
     let handler;
@@ -94,53 +96,49 @@ export const ArticleCreate = ({
             />
 
             <FormWrapper title={`${btnText} article`}>
-                <p>{error}</p>
                 <form onSubmit={handler}>
-                    <p>
-                        <input
-                            type="text"
-                            placeholder="Title"
-                            onChange={inputChangeHandler}
-                            value={form.title}
-                            name="title"
-                            disabled={isDelete}
-                        />
-                    </p>
-                    <p>
-                        <input
-                            type="text"
-                            placeholder="Image URL"
-                            onChange={inputChangeHandler}
-                            value={form.imageUrl}
-                            name="imageUrl"
-                            disabled={isDelete}
-                        />
-                    </p>
-                    <p>
-                        <textarea
-                            onChange={inputChangeHandler}
-                            value={form.summary}
-                            name="summary"
-                            id="summary"
-                            placeholder="Write a short summary"
-                            disabled={isDelete}
-                        />
-                    </p>
-                    <p>
-                        <textarea
-                            onChange={inputChangeHandler}
-                            value={form.description}
-                            name="description"
-                            id="description"
-                            placeholder="Write a description"
-                            disabled={isDelete}
-                        />
-                    </p>
+                    <FormInput
+                        value={form.title}
+                        name="title"
+                        type="text"
+                        placeholder="Title"
+                        changeHandler={inputChangeHandler}
+                        validator={validateArticleInput}
+                        disabled={isDelete}
+                    />
+                    <FormInput
+                        value={form.imageUrl}
+                        name="imageUrl"
+                        type="text"
+                        placeholder="Image URL"
+                        changeHandler={inputChangeHandler}
+                        validator={validateArticleInput}
+                        disabled={isDelete}
+                    />
+                    <FormInput
+                        isTextarea
+                        value={form.summary}
+                        name="summary"
+                        placeholder="Write a short summary"
+                        changeHandler={inputChangeHandler}
+                        validator={validateArticleInput}
+                        disabled={isDelete}
+                    />
+                    <FormInput
+                        isTextarea
+                        value={form.description}
+                        name="description"
+                        placeholder="Write a description"
+                        changeHandler={inputChangeHandler}
+                        validator={validateArticleInput}
+                        disabled={isDelete}
+                    />
                     <p>
                         <input
                             type="submit"
                             className="boxed-btn"
                             value={btnText}
+                            disabled={!isValidArticle(form)}
                         />
                     </p>
                 </form>
