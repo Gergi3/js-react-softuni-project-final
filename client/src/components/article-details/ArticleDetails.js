@@ -13,7 +13,6 @@ import "./ArticleDetails.scss"
 export const ArticleDetails = () => {
     const [article, setArticle] = useState({});
     const [recentArticles, setRecentArticles] = useState([]);
-    const [deleteIsPoppedUp, setDeletePoppedUp] = useState(false);
     const { user } = useContext(AuthContext)
     const { id } = useParams();
     const navigate = useNavigate();
@@ -29,10 +28,6 @@ export const ArticleDetails = () => {
             .then(res => setArticle(res))
             .catch(() => navigate('/404'));
     }, [id, navigate]);
-
-    const deleteArticleHandler = () => {
-        setDeletePoppedUp(true)
-    }
 
     return (
         <>

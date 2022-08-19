@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import * as articleServices from '../../services/articleServices'
 
+import { AuthContext } from "../../contexts/AuthContext";
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import './ArticleCreate.scss';
@@ -12,12 +13,14 @@ export const ArticleCreate = ({
     isDelete
 }) => {
     const [error, setError] = useState(null);
+    const [game, setGame] = useState({});
     const [form, setForm] = useState({
         title: '',
         imageUrl: '',
         summary: '',
         description: '',
     })
+    const { user } = useContext(AuthContext);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -31,10 +34,16 @@ export const ArticleCreate = ({
                         summary: res.summary,
                         description: res.description,
                     })
+                    setGame(res);
                 })
                 .catch(err => navigate('/404'))
         }
-    }, [id, isDelete, isEdit, navigate])
+    }, [id, isDelete, isEdit, navigate]);
+
+    if ((isEdit || isDelete) && user._id === game.owner._id) {
+        return <Navigate to="/login" replace={true} />
+    }
+
 
     const inputChangeHandler = (e) => {
         setForm(old => ({
