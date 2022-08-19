@@ -295,3 +295,18 @@ a.cart-btn {
 .section-title {
   margin-bottom: 80px;
 }
+
+.form-error {
+  color: #d9534f;
+  min-height: 20px;
+}
+
+input:disabled {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: not-allowed;
+  pointer-events: all;
+}
