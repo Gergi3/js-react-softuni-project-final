@@ -11,8 +11,8 @@ Features like pagination, and "show more" button for revealing articles each tim
 - contact us sending an email
 - client-side data validation
 - comments (CRUD)
-- routes guarding
-- code refactoring
+- routes guarding ✔️
+- code refactoring ✔️
 </p>
 
 # To start app
