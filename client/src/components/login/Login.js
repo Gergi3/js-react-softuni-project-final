@@ -42,14 +42,16 @@ export const Login = () => {
             />
 
             <FormWrapper title="Login">
-                <p>{error}</p>
+                {error &&
+                    <p className="form-error">{error}</p>
+                }
                 <form onSubmit={submitHandler}>
                     <p>
                         <input
                             onChange={inputChangeHandler}
                             value={formState.email}
                             name="email"
-                            type="email"
+                            type="text"
                             placeholder="Email"
                         />
                     </p>
@@ -66,7 +68,7 @@ export const Login = () => {
                         <input
                             type="submit"
                             className="boxed-btn"
-                            defaultValue="Submit"
+                            value="Login"
                         />
                     </p>
                 </form>
