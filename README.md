@@ -9,7 +9,7 @@ Features like pagination, and "show more" button for revealing articles each tim
 <b>TO BE IMPLEMENTED SOON (BEFORE 21.08.2022)</b>
 - search bar
 - contact us sending an email
-- client-side data validation
+- client-side data validation ✔️
 - comments (CRUD)
 - routes guarding ✔️
 - code refactoring ✔️
