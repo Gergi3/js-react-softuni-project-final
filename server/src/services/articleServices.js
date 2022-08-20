@@ -9,45 +9,38 @@ async function getAll(query) {
     const order = query?.order; // desc/asc
     const search = query?.search; // asdasd
     const criteria = (query?.criteria || '').trim(); // summary
+    const owner = (query?.owner || '') // id of owner
     const except = (query?.except || '').trim(); // summary
     const skipIndex = (page - 1) * limit;
-  
+
     const sortCriteria = {};
 
     let buildedQuery = {};
     if (criteria === 'createdAt' || criteria === 'updatedAt') {
         throw new ValidationError('You cannot serach by createdAt or updatedAt.', 403)
     }
-    
+
     if (sort && sort !== 'null' && order && order !== 'null') {
-      sortCriteria[sort] = order;
+        sortCriteria[sort] = order;
     }
-  
+
     if (search && search !== 'null' && criteria && criteria !== 'null') {
-      buildedQuery[criteria] = criteria == '_id' || criteria == 'owner' ? search : new RegExp(search, 'i');
+        buildedQuery[criteria] = { $regex: new RegExp(search, 'gi') };
     }
 
-
-    let excluded;
-
-    if (except) {
-        try {
-            excluded = except.split(',');
-        } catch {
-            excluded = [];
-        }
+    if (owner && owner !== 'null') {
+        buildedQuery['owner'] = owner;
     }
 
-    let count = await Article.countDocuments();
-
-    if (search == '' && criteria == 'owner') {
-        return { articles: [], count };
+    if (except && except !== 'null') {
+        buildedQuery._id = { $nin: except.split(',') }
     }
+
+    let count = await Article
+        .find(buildedQuery)
+        .countDocuments();
 
     let articles = await Article
-        .find({
-            _id: { $nin: excluded }
-        })
         .find(buildedQuery)
         .select('title summary description imageUrl createdAt updatedAt owner')
         .limit(limit)
@@ -62,12 +55,12 @@ async function getAll(query) {
 async function create(item) {
     const result = new Article({
         title: item.title,
-        summary: item.summary, 
-        description: item.description, 
-        imageUrl: item.imageUrl, 
+        summary: item.summary,
+        description: item.description,
+        imageUrl: item.imageUrl,
         owner: item.owner
     });
-    
+
     await result.save();
 
     return result;

@@ -7,8 +7,8 @@ The static pages are Contact us and About us. <br />
 Features like pagination, and "show more" button for revealing articles each time its clicked. <br />
 
 <b>TO BE IMPLEMENTED SOON (BEFORE 21.08.2022)</b>
-- search bar
-- contact us sending an email
+- search bar ✔️
+- contact us sending an email ❌ (postponed for after 21.08.2022 because server-side focused)
 - client-side data validation ✔️
 - comments (CRUD)
 - routes guarding ✔️

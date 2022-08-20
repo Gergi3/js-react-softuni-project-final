@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 
 import * as articleServices from '../../services/articleServices';
 
+import { AuthContext } from '../../contexts/AuthContext';
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { Pagination } from '../pagination/Pagination';
 import { ArticlesList } from '../shared/articles-list/ArticlesList';
-import { AuthContext } from '../../contexts/AuthContext';
+import { ArticlesSearch } from '../articles-search/ArticlesSearch';
 import './ArticlesPage.scss';
 
 export const ArticlesPage = ({
@@ -14,13 +15,13 @@ export const ArticlesPage = ({
     const [articles, setArticles] = useState([]);
     const [articlesCount, setArticlesCount] = useState(1);
     const [page, setPage] = useState(1)
+    const [searchData, setSearchData] = useState({});
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        let query = { limit: 3, page }
+        let query = { limit: 3, page, ...searchData }
         if (isUserArticles && user) {
-            query.criteria = 'owner';
-            query.search = user._id;
+            query.owner = user._id;
         }
 
         articleServices.getAll(query)
@@ -28,11 +29,14 @@ export const ArticlesPage = ({
                 setArticles(res.articles);
                 setArticlesCount(res.count);
             })
-    }, [isUserArticles, page, user]);
+            .catch(err => console.log(err));
+    }, [isUserArticles, page, searchData, user]);
 
-    const changePageHandler = (newPage) => {
-        setPage(newPage);
-    }
+    const changePageHandler = (newPage) => setPage(newPage);
+    const searchHandler = (newSearchData) => {
+        setPage(1);
+        setSearchData(newSearchData);
+    };
 
     return (
         <>
@@ -42,16 +46,7 @@ export const ArticlesPage = ({
             />
 
             <div className="container">
-                <div className="col-lg-8 col-md-8 mx-auto pt-50">
-                    <div className="footer-box subscribe">
-                        <form>
-                            <input type="email" placeholder="Search" />
-                            <button type="submit">
-                                <i className="fas fa-paper-plane" />
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                <ArticlesSearch searchHandler={searchHandler}/>
 
                 <ArticlesList articles={articles} />
 

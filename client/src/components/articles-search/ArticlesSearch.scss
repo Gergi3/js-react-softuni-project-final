@@ -1,0 +1,44 @@
+form.footer-box {
+  width: 100%;
+  &.subscribe {
+    input,
+    select {
+      border: none;
+      background-color: #012738;
+      padding: 15px;
+      margin-right: 5px;
+      color: #fff;
+      height: 55px;
+    }
+
+    input {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      width: 59%;
+    }
+
+    select {
+      line-height: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      height: 55px;
+      width: 20%;
+    }
+
+    button {
+      width: 20%;
+      border: none;
+      background-color: #012738;
+      color: #f28123;
+      padding: 15px 0;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      cursor: pointer;
+      height: 55px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
