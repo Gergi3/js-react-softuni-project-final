@@ -20,8 +20,6 @@ async function register(email, password) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    console.log(email);
-    console.log(password);
     const user = new User({
         email,
         hashedPassword
