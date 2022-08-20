@@ -5,7 +5,6 @@ import * as articleServices from '../../services/articleServices';
 import { parseDate } from "../../helpers/appHelpers";
 
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
-import { CommentsCreate } from "./comments-create/CommentsCreate";
 import { CommentsList } from "./comments-list/CommentsList";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./ArticleDetails.scss"
@@ -69,15 +68,7 @@ export const ArticleDetails = () => {
                                     </p>
 
                                 </div>
-                                <CommentsList />
-                                {user.accessToken
-                                    ? <CommentsCreate />
-                                    : <p>
-                                        If you want to leave a comment you need to <Link to="/login">log in</Link> your account
-                                        or if you dont have an account you can go <Link to="/register">register</Link> one.
-                                    </p>
-                                }
-
+                                <CommentsList articleId={id} />
                             </div>
                         </div>
                         <div className="col-lg-4">

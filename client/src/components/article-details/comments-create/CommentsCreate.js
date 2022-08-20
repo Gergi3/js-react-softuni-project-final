@@ -1,30 +1,53 @@
+import { useState } from 'react';
+
+import { validateCommentInput, isValidComment } from '../../../validators/commentValidator';
+import * as commentServices from '../../../services/commentServices';
+
+import { FormInput } from '../../shared/form-input/FormInput';
 import './CommentsCreate.scss'
 
-export const CommentsCreate = () => {
+export const CommentsCreate = ({
+    articleId,
+    createCommentHandler
+}) => {
+    const [text, setText] = useState('');
+
+    const commentChangeHandler = (e) => {
+        setText(e.target.value)
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        commentServices.create(articleId, { text })
+            .then(() => {
+                setText('');
+                createCommentHandler()
+            })
+            .catch(err => console.log(err));
+    }
+
     return (
         <div className="comment-template">
             <h4>Leave a comment</h4>
             <p>
-                If you have a comment dont feel hesitate to send it.
+                If you have a comment dont feel hesitatent to send it.
                 We're a friendly community.
             </p>
-            <form action="index.html">
+            <form onSubmit={submitHandler}>
+                <FormInput
+                    isTextarea={true}
+                    value={text}
+                    name="text"
+                    placeholder="Your Message.."
+                    changeHandler={commentChangeHandler}
+                    validator={validateCommentInput}
+                />
                 <p>
-                    <input type="text" placeholder="Your Name" />
-                    <input type="email" placeholder="Your Email" />
-                </p>
-                <p>
-                    <textarea
-                        name="comment"
-                        id="comment"
-                        cols={30}
-                        rows={10}
-                        placeholder="Your Message"
-                        defaultValue={""}
+                    <input
+                        type="submit"
+                        value="Submit"
+                        disabled={!isValidComment({ text })}
                     />
-                </p>
-                <p>
-                    <input type="submit" defaultValue="Submit" />
                 </p>
             </form>
         </div>

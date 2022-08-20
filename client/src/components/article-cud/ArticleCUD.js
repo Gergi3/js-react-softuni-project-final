@@ -72,7 +72,7 @@ export const ArticleCUD = ({
         e.preventDefault();
         articleServices.deleteById(id)
             .then(() => navigate('/articles'))
-            .then(err => console.log(err));
+            .catch(err => console.log(err));
     }
 
     let handler;

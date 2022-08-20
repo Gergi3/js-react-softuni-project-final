@@ -33,7 +33,6 @@ export const FormInput = ({
                     <textarea
                         value={value}
                         name={name}
-                        type={type}
                         placeholder={placeholder}
                         onChange={changeHandler}
                         onBlur={setIsBlurred.bind(null, true)}

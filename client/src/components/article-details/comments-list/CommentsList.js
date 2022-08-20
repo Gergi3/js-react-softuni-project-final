@@ -1,16 +1,54 @@
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import * as commentServices from '../../../services/commentServices';
+
+import { CommentsCreate } from "../comments-create/CommentsCreate";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { CommentsItem } from './comments-item/CommentsItem';
 import './CommentsList.scss'
 
-export const CommentsList = () => {
+export const CommentsList = ({
+    articleId
+}) => {
+    const [comments, setComments] = useState([]);
+    const { user } = useContext(AuthContext)
+
+    const fetchComments = useCallback(() => {
+        commentServices.getAllByArticleId(articleId)
+            .then(res => setComments(res))
+            .catch(err => console.log(err));
+    }, [articleId]);
+
+    useEffect(() => fetchComments(), [fetchComments]);
+
+    const createCommentHandler = () => fetchComments();
+
     return (
-        <div className="comments-list-wrap">
-            <h3 className="comment-count-title">3 Comments</h3>
-            <div className="comment-list">
-                <CommentsItem />
-                <CommentsItem />
-                <CommentsItem />
+        <>
+            <div className="comments-list-wrap">
+                <h3 className="comment-count-title">{comments.length} Comments</h3>
+                <div className="comment-list">
+                    {comments.map(comment =>
+                        <CommentsItem key={comment._id} comment={comment}/>
+                    )}
+                </div>
             </div>
-        </div>
+            {user.accessToken
+                ? (
+                    <CommentsCreate
+                        articleId={articleId}
+                        createCommentHandler={createCommentHandler}
+                    />
+                )
+                : (
+                    <p>
+                        If you want to leave a comment you need to <Link to="/login">log in</Link> your account
+                        or if you dont have an account you can go <Link to="/register">register</Link> one.
+                    </p>
+                )
+            }
+        </>
     );
 };
 

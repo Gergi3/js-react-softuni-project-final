@@ -1,21 +1,38 @@
 const Comment = require('../models/Comment');
 
+const Article = require('../models/Article')
+
 const getById = (commentId) => {
     return Comment.findById(commentId);
 }
 
-const getAllByArticleId = (articleId) => {
-    const comments = Comment.find({ article: articleId });
-    return comments;
+const getAllByArticleId = async (articleId) => {
+    const article = await Article.findById(articleId)
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'owner',
+                select: 'email',
+                model: 'User'
+            }
+        });
+
+    return article.comments;
 }
 
-const create = (item) => {
+const create = async (item) => {
     const data = {
-        text: item.text
+        text: item.text,
+        article: item.article,
+        owner: item.owner
     };
+    const comment = await Comment.create(data);
 
-    const comments = Comment.create(data);
-    return comments;
+    const article = await Article.findById(item.article);
+    article.comments.push(comment);
+    article.save();
+    
+    return comment;
 }
 
 const updateById = async (existing, data) => {

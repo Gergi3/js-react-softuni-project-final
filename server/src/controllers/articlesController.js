@@ -66,6 +66,7 @@ router.delete('/:id', preload(articleServices), isAuth(), isOwner(), async (req,
 router.get('/:id/comments', preload(articleServices), async (req, res) => {
     try {
         const result = await commentServices.getAllByArticleId(req.params.id);
+
         res.json(result);
     } catch (err) {
         errorHandler(err, res, req);

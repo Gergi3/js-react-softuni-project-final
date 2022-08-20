@@ -1,4 +1,8 @@
-export const CommentsItem = () => {
+import { parseDate } from "../../../../helpers/appHelpers";
+
+export const CommentsItem = ({
+    comment
+}) => {
     return (
         <div className="single-comment-body">
             <div className="comment-user-avater">
@@ -6,16 +10,12 @@ export const CommentsItem = () => {
             </div>
             <div className="comment-text-body">
                 <h4>
-                    Addy Aoe{" "}
-                    <span className="comment-date">May 12, 2020</span>{" "}
+                    {comment.owner.email}
+                    <span className="comment-date">{parseDate(comment.createdAt)}</span>
                     {/* <a href="#">reply</a> */}
                 </h4>
                 <p>
-                    Nunc risus ex, tempus quis purus ac, tempor consequat ex.
-                    Vivamus sem magna, maximus at est id, maximus aliquet
-                    nunc. Suspendisse lacinia velit a eros porttitor, in
-                    interdum ante faucibus Suspendisse lacinia velit a eros
-                    porttitor, in interdum ante faucibus.
+                    {comment.text}
                 </p>
             </div>
         </div>
