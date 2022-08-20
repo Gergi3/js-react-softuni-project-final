@@ -87,22 +87,22 @@ export const ArticleDetails = () => {
                                     <ul>
                                         {recentArticles.map(article => (
                                             <li key={article._id}>
-                                                <a href={`/articles/${article._id}`}>
+                                                <Link to={`/articles/${article._id}`}>
                                                     {article.title}
-                                                </a>
+                                                </Link>
                                             </li>
                                         ))}
 
                                     </ul>
                                 </div>
-                                <div className="tag-section">
+                                {/* <div className="tag-section">
                                     <h4>Category</h4>
                                     <ul>
                                         <li>
                                             <a href="single-news.html">Apple</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

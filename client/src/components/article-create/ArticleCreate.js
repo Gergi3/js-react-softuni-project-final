@@ -57,7 +57,7 @@ export const ArticleCreate = ({
     const createSubmitHandler = (e) => {
         e.preventDefault();
         articleServices.create(form)
-            .then(() => navigate('/articles'))
+            .then(res => navigate(`/articles/${res._id}`))
             .catch(err => console.log(err))
     }
 
