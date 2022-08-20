@@ -14,7 +14,7 @@ export const ArticleCUD = ({
     isEdit,
     isDelete
 }) => {
-    const [game, setGame] = useState({});
+    const [article, setArticle] = useState({});
     const [form, setForm] = useState({
         title: '',
         imageUrl: '',
@@ -27,7 +27,7 @@ export const ArticleCUD = ({
 
     useEffect(() => {
         if (!isEdit && !isDelete) {
-            return
+            return;
         }
 
         articleServices.getById(id)
@@ -38,12 +38,12 @@ export const ArticleCUD = ({
                     summary: res.summary,
                     description: res.description,
                 })
-                setGame(res);
+                setArticle(res);
             })
             .catch(() => navigate('/404'))
     }, [id, isDelete, isEdit, navigate]);
 
-    if (game.owner && user && (isEdit || isDelete) && user._id !== game.owner._id) {
+    if (article.owner && user && (isEdit || isDelete) && user._id !== article.owner._id) {
         return <Navigate to="/login" replace={true} />
     }
 

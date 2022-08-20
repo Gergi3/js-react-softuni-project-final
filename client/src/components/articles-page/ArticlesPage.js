@@ -30,7 +30,7 @@ export const ArticlesPage = ({
                 setArticlesCount(res.count);
             })
             .catch(err => console.log(err));
-    }, [isUserArticles, page, searchData, user]);
+    }, [isUserArticles, user, page, searchData]);
 
     const changePageHandler = (newPage) => setPage(newPage);
     const searchHandler = (newSearchData) => {

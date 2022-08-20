@@ -21,7 +21,7 @@ export const Contact = () => {
                                         Active contact hours
                                     </h4>
                                     <p>
-                                        MON - FRIDAY: 8 to 9 PM <br /> SAT - SUN: 10 to 8 PM{" "}
+                                        MON - FRIDAY: 8 to 9 PM <br /> SAT - SUN: 10 to 8 PM
                                     </p>
                                 </div>
                                 <div className="contact-form-box">
