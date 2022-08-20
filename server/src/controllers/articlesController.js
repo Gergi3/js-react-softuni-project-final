@@ -88,8 +88,7 @@ router.post('/:id/comments', preload(articleServices), isAuth(), async (req, res
     }
 });
 
-router.put('/:articleId/comments/:commentId',
-    preload(articleServices, 'articleId'),
+router.put('/comments/:commentId',
     preload(commentServices, 'commentId'),
     isAuth(),
     isOwner(),
@@ -102,8 +101,7 @@ router.put('/:articleId/comments/:commentId',
     }
 });
 
-router.delete('/:articleId/comments/:commentId',
-    preload(articleServices, 'articleId'),
+router.delete('/comments/:commentId',
     preload(commentServices, 'commentId'),
     isAuth(),
     isOwner(),

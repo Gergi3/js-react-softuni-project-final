@@ -8,7 +8,7 @@ import './CommentsCreate.scss'
 
 export const CommentsCreate = ({
     articleId,
-    createCommentHandler
+    commentHandler
 }) => {
     const [text, setText] = useState('');
 
@@ -21,7 +21,7 @@ export const CommentsCreate = ({
         commentServices.create(articleId, { text })
             .then(() => {
                 setText('');
-                createCommentHandler()
+                commentHandler()
             })
             .catch(err => console.log(err));
     }

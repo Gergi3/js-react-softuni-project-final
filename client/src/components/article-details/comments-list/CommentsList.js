@@ -22,7 +22,7 @@ export const CommentsList = ({
 
     useEffect(() => fetchComments(), [fetchComments]);
 
-    const createCommentHandler = () => fetchComments();
+    const commentHandler = () => fetchComments();
 
     return (
         <>
@@ -30,7 +30,11 @@ export const CommentsList = ({
                 <h3 className="comment-count-title">{comments.length} Comments</h3>
                 <div className="comment-list">
                     {comments.map(comment =>
-                        <CommentsItem key={comment._id} comment={comment}/>
+                        <CommentsItem
+                            key={comment._id}
+                            comment={comment}
+                            commentHandler={commentHandler}
+                        />
                     )}
                 </div>
             </div>
@@ -38,7 +42,7 @@ export const CommentsList = ({
                 ? (
                     <CommentsCreate
                         articleId={articleId}
-                        createCommentHandler={createCommentHandler}
+                        commentHandler={commentHandler}
                     />
                 )
                 : (
