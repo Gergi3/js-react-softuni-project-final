@@ -25,7 +25,6 @@ export const CommentsItem = ({
 
     const editHandler = (e) => {
         e.preventDefault();
-        console.log(comment._id);
         commentServices.edit(comment._id, form)
             .then(() => {
                 commentHandler();
