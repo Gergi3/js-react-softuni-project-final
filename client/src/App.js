@@ -8,7 +8,7 @@ import { Header } from './components/shared/header/Header';
 import { Home } from './components/home/Home';
 import { Contact } from './components/contact/Contact';
 import { About } from './components/about/About';
-import { ArticleCreate } from './components/article-create/ArticleCreate';
+import { ArticleCUD } from './components/article-cud/ArticleCUD';
 import { ArticlesPage } from './components/articles-page/ArticlesPage';
 import { ArticleDetails } from './components/article-details/ArticleDetails';
 import { Login } from './components/login/Login';
@@ -26,9 +26,9 @@ export const App = () => {
                 <Routes>
                     <Route element={<PrivateGuard />}>
                         <Route path="/my-articles" element={<ArticlesPage isUserArticles={true} />} />
-                        <Route path="/articles/create" element={<ArticleCreate />} />
-                        <Route path="/articles/edit/:id" element={<ArticleCreate isEdit={true} />} />
-                        <Route path="/articles/delete/:id" element={<ArticleCreate isDelete={true} />} />
+                        <Route path="/articles/create" element={<ArticleCUD />} />
+                        <Route path="/articles/edit/:id" element={<ArticleCUD isEdit={true} />} />
+                        <Route path="/articles/delete/:id" element={<ArticleCUD isDelete={true} />} />
                         <Route path="/logout" element={<Logout />} />
                     </Route>
 

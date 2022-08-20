@@ -8,9 +8,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Breadcrumb } from "../shared/breadcrumb/Breadcrumb";
 import { FormWrapper } from "../shared/form-wrapper/FormWrapper";
 import { FormInput } from "../shared/form-input/FormInput";
-import './ArticleCreate.scss';
+import './ArticleCUD.scss';
 
-export const ArticleCreate = ({
+export const ArticleCUD = ({
     isEdit,
     isDelete
 }) => {
