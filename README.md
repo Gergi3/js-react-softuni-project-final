@@ -10,7 +10,7 @@ Features like pagination, and "show more" button for revealing articles each tim
 - search bar ✔️
 - contact us sending an email ❌ (postponed for after 21.08.2022 because server-side focused)
 - client-side data validation ✔️
-- comments (CRUD)
+- comments (CRUD) ✔️
 - routes guarding ✔️
 - code refactoring ✔️
 </p>
