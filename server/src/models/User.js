@@ -10,8 +10,6 @@ const userSchema = new Schema({
     hashedPassword: {
         type: String,
         required: true,
-        minLength: 3,
-        maxLength: 18
     }
 });
 

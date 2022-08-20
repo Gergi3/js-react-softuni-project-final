@@ -9,17 +9,19 @@ const blacklist = new Set();
 const JWT_SECRET = 't gcsergcserg  b920n3w4pc[w3tcawert6v9';
 
 async function register(email, password) {
-    // check if email is taken
     const existing = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
     if (existing) {
         throw new ValidationError('Email is taken', 403);
     }
+    if (password.length < 3 || password.length > 18) {
+        throw new ValidationError('Password must be between 3 and 18 characters long', 403)
+    }
 
-    // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // store user
+    console.log(email);
+    console.log(password);
     const user = new User({
         email,
         hashedPassword
@@ -31,14 +33,12 @@ async function register(email, password) {
 }
 
 async function login(email, password) {
-    // check if user exists
     const user = await User.findOne({ email: new RegExp(`^${email}$`, 'i') });
 
     if (!user) {
         throw new ValidationError('Incorrect email or password', 403);
     }
 
-    // verify password
     const match = await bcrypt.compare(password, user.hashedPassword);
 
     if (!match) {

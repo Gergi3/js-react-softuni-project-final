@@ -9,7 +9,7 @@ import './Home.scss'
 export const Home = () => {
     const [articles, setArticles] = useState([]);
     const [articlesCount, setArticlesCount] = useState(0);
-    const [limit, setLimit] = useState(9);
+    const [limit, setLimit] = useState(6);
 
     useEffect(() => {
         articleServices.getAll({ limit })
@@ -21,7 +21,7 @@ export const Home = () => {
 
 
     const onMoreClickHandler = () => {
-        setLimit(old => Number(old) + 9);
+        setLimit(old => Number(old) + 6);
     }
 
     const hasMoreArticles = articlesCount === articles.length;

@@ -19,7 +19,7 @@ export const ArticlesPage = ({
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        let query = { limit: 9, page, ...searchData }
+        let query = { limit: 6, page, ...searchData }
         if (isUserArticles && user) {
             query.owner = user._id;
         }

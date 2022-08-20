@@ -6,8 +6,7 @@ export const Pagination = ({
     articlesCount
 }) => {
     const currentPage = Number(page);
-    const pagesCount = Math.ceil(articlesCount / Number(9)) || 1;
-    console.log(pagesCount);
+    const pagesCount = Math.ceil(articlesCount / Number(6)) || 1;
     
     const paginateHandler = (e) => {
         e.preventDefault();

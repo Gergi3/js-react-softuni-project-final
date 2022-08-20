@@ -3,7 +3,6 @@ const { errorHandler } = require('../utils/errorHandler');
 
 const router = require('express').Router();
 
-
 router.post('/register', async (req, res) => {
     const { email, password } = req.body;
 
