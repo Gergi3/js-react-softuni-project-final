@@ -11,7 +11,7 @@ export const ArticlesList = ({
                     ? articles.map(article => (
                         <ArticleItem key={article._id} article={article} />
                     ))
-                    : <h1>No articles found yet..</h1>
+                    : <h1 className="pb-80">No articles found yet..</h1>
                 }
             </div>
         </div>
